@@ -1,3 +1,5 @@
+// A simple hextime clock
+// See: https://en.wikipedia.org/wiki/Florence_Mean_Time
 package main
 
 import (

@@ -1,3 +1,5 @@
+// A simple library to convert time objects into string representations of hexadecimal time.
+// See: https://en.wikipedia.org/wiki/Florence_Mean_Time
 package hextime
 
 import (
@@ -5,15 +7,12 @@ import (
 	"fmt"
 )
 
-func getTime(when string) time.Time {
-	t, _ := time.Parse(time.Kitchen, when)
-	return t
-}
-
+// Return current hex time
 func Now() string {
 	return Convert(time.Now())
 }
 
+// Convert a given time into a hex time
 func Convert(now time.Time) string {
 	now = now.UTC()
 	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC).UnixNano()
