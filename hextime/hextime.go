@@ -3,17 +3,36 @@
 package hextime
 
 import (
-	"time"
 	"fmt"
+	"strings"
+	"time"
 )
 
-// Return current hex time
+const (
+	// Default format for times
+	CommaNotation           = ",%A%B%C%D"
+	PeriodNotation          = ".%A%B%C%D"
+	BoardmanNotationSeconds = "%A_%B%C_%D"
+	BoardmanNotation        = "%A_%B%C"
+)
+
+// Return current hex time with default format
 func Now() string {
 	return Convert(time.Now())
 }
 
-// Convert a given time into a hex time
+// Convert current time with a custom format string
+func Nowf(format string) string {
+	return Convertf(format, time.Now())
+}
+
+// Convert time with default format
 func Convert(now time.Time) string {
+	return Convertf(BoardmanNotationSeconds, now)
+}
+
+// Convert a given time into a hex time
+func Convertf(format string, now time.Time) string {
 	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local).UnixNano()
 	current := now.UnixNano()
 
@@ -28,5 +47,20 @@ func Convert(now time.Time) string {
 	hexMinute := hexSeconds / 16 % 16
 	hexSeconds = hexSeconds % 16
 
-	return fmt.Sprintf(",%x%x%x%x", hexHour, hexMaxime, hexMinute, hexSeconds)
+	return hexFmt(format, hexHour, hexMaxime, hexMinute, hexSeconds)
+}
+
+// Replace format string entities with time parts
+func hexFmt(format string, h, mx, m, s int64) string {
+	output := format
+	output = strings.Replace(output, "%A", fmt.Sprintf("%X", h), 1)
+	output = strings.Replace(output, "%B", fmt.Sprintf("%X", mx), 1)
+	output = strings.Replace(output, "%C", fmt.Sprintf("%X", m), 1)
+	output = strings.Replace(output, "%D", fmt.Sprintf("%X", s), 1)
+
+	output = strings.Replace(output, "%a", fmt.Sprintf("%x", h), 1)
+	output = strings.Replace(output, "%b", fmt.Sprintf("%x", mx), 1)
+	output = strings.Replace(output, "%c", fmt.Sprintf("%x", m), 1)
+	output = strings.Replace(output, "%d", fmt.Sprintf("%x", s), 1)
+	return output
 }

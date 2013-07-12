@@ -3,10 +3,20 @@
 package main
 
 import (
-	"github.com/chrissexton/hexclock/hextime"
+	"flag"
 	"fmt"
+	"github.com/chrissexton/hexclock/hextime"
+)
+
+var (
+	format = flag.String(
+		"format",
+		hextime.BoardmanNotationSeconds,
+		"format of time output",
+	)
 )
 
 func main() {
-	fmt.Println(hextime.Now())
+	flag.Parse()
+	fmt.Println(hextime.Nowf(*format))
 }
