@@ -2,12 +2,18 @@ package hextime
 
 import (
 	"testing"
+	"time"
 )
 
 func check(t *testing.T, actual, expected string) {
 	if actual != expected {
 		t.Errorf("%s != %s", actual, expected)
 	}
+}
+
+func getTime(when string) time.Time {
+	t, _ := time.ParseInLocation(time.Kitchen, when, time.Local)
+	return t
 }
 
 func TestCalcTime(t *testing.T) {

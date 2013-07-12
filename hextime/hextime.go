@@ -14,8 +14,7 @@ func Now() string {
 
 // Convert a given time into a hex time
 func Convert(now time.Time) string {
-	now = now.UTC()
-	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC).UnixNano()
+	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local).UnixNano()
 	current := now.UnixNano()
 
 	sinceMidnight := current - today
