@@ -10,7 +10,7 @@ import (
 
 const (
 	// Default format for times
-	CommaNotation           = ",%A%B%C%D"
+	CommaNotation           = ",%a%b%c%d"
 	PeriodNotation          = ".%A%B%C%D"
 	BoardmanNotationSeconds = "%A_%B%C_%D"
 	BoardmanNotation        = "%A_%B%C"
@@ -28,7 +28,7 @@ func Nowf(format string) string {
 
 // Convert time with default format
 func Convert(now time.Time) string {
-	return Convertf(BoardmanNotationSeconds, now)
+	return Convertf(PeriodNotation, now)
 }
 
 // Convert a given time into a hex time

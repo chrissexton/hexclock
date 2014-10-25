@@ -17,9 +17,9 @@ func getTime(when string) time.Time {
 }
 
 func TestCalcTime(t *testing.T) {
-	check(t, Convert(getTime("7:30AM")), ",5000")
-	check(t, Convert(getTime("9:00AM")), ",6000")
-	check(t, Convert(getTime("12:00PM")), ",8000")
-	check(t, Convert(getTime("5:00PM")), ",b555")
-	check(t, Convert(getTime("9:00PM")), ",e000")
+	check(t, Convert(getTime("7:30AM")), ".5000")
+	check(t, Convert(getTime("9:00AM")), ".6000")
+	check(t, Convert(getTime("12:00PM")), ".8000")
+	check(t, Convert(getTime("5:00PM")), ".B555")
+	check(t, Convert(getTime("9:00PM")), ".E000")
 }

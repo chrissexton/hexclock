@@ -11,7 +11,7 @@ import (
 var (
 	format = flag.String(
 		"format",
-		hextime.BoardmanNotationSeconds,
+		hextime.PeriodNotation,
 		"format of time output",
 	)
 )
